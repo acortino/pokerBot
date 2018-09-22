@@ -1,19 +1,17 @@
 # import the necessary packages
-from pyimagesearch.shapedetector import ShapeDetector
 from imutils import contours
-from pyimagesearch.colorlabeler import ColorLabeler
 import argparse
-import imutils
 import cv2
 import numpy as np
 
 cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
 
+#Return an image of your cards based on capture 1920x1080
 def selectMyHand(image):
     return image[700:740, 893:1000]
 
-
+#Allow you to select a region on a picture and print the coordinate
 def selectRegion(image):
     # Select ROI
     r = cv2.selectROI(image)
@@ -21,9 +19,6 @@ def selectRegion(image):
     # Crop image
     # [y:y+h, x:x+w]
     imCrop = image[int(r[1]):int(r[1] + r[3]), int(r[0]):int(r[0] + r[2])]
-    # Display cropped image
-    cv2.imshow("Cropped", imCrop)
-    cv2.waitKey(0)
 
 
 # construct the argument parse and parse the arguments
