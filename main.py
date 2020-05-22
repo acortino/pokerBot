@@ -14,14 +14,14 @@ ap.add_argument("-r", "--reference", required=True,
                 help="path to reference OCR-A image")
 args = vars(ap.parse_args())
 
-print "Loading the image..."
+print("Loading the image...")
 image = cv2.imread(args["image"])
-print "Loading the reference..."
+print("Loading the reference...")
 reference = cv2.imread(args["reference"])
-print "Init OCR..."
+print("Init OCR...")
 ocr = OCR(image, reference)
-print "Retrieving your hand..."
+print("Retrieving your hand...")
 myHand = Hand(ocr.getMyHand())
-print "Evaluating the score..."
+print("Evaluating the score...")
 myHand.evaluateScore()
-print myHand.toString()
+print(myHand.toString())
