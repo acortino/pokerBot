@@ -1,4 +1,6 @@
 # encoding: utf-8
+from models.Card import REF_VALUE_PERCENT, REF_WIN_PERCENT_PREFLOP, REF_VALUE_STR
+
 
 class Hand:
     cards = []
@@ -24,4 +26,14 @@ class Hand:
         return handStr
 
     def evaluateScore(self):
-        self.score = 0.32
+        if self.suited():
+            lin = REF_VALUE_PERCENT.index(REF_VALUE_STR[self.cards[0].value])
+            col = REF_VALUE_PERCENT.index(REF_VALUE_STR[self.cards[1].value])
+        else:
+            lin = REF_VALUE_PERCENT.index(REF_VALUE_STR[self.cards[1].value])
+            col = REF_VALUE_PERCENT.index(REF_VALUE_STR[self.cards[0].value])
+
+        self.score = REF_WIN_PERCENT_PREFLOP[lin][col]
+
+    def suited(self):
+        return self.cards[0].color == self.cards[1].color
