@@ -22,7 +22,7 @@ class OCR:
     def selectRegion(self):
         # Allow you to select a region on a picture and print the coordinate
         r = cv2.selectROI(self.image)
-        print r
+        print(r)
         # Crop image
         # [y:y+h, x:x+w]
         imCrop = self.image[int(r[1]):int(r[1] + r[3]), int(r[0]):int(r[0] + r[2])]
@@ -30,7 +30,7 @@ class OCR:
     def setOCRReference(self):
         gray = cv2.cvtColor(self.reference, cv2.COLOR_BGR2GRAY)
         refThresh = cv2.threshold(gray, 60, 255, cv2.THRESH_BINARY)[1]
-        im2, refCnts, hierarchy = cv2.findContours(refThresh.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        refCnts, hierarchy = cv2.findContours(refThresh.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
         refCnts = contours.sort_contours(refCnts, method="left-to-right")[0]
         for (i, c) in enumerate(refCnts):
             (x, y, w, h) = cv2.boundingRect(c)
@@ -44,7 +44,7 @@ class OCR:
         img = self.selectMyHand()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         thresh = cv2.threshold(gray, 60, 255, cv2.THRESH_BINARY)[1]
-        im2, cnts, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        cnts, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
         cnts = contours.sort_contours(cnts, method="left-to-right")[0]
         locs = []
 
